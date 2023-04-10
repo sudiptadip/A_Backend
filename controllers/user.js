@@ -4,13 +4,15 @@ const createANewAccount = async (req, res) => {
   const { name, email, bio = "", url } = req.body;
   try {
     const existingUser = await newusers.findOne({ email });
+    console.log(email)
+    console.log(existingUser)
     if (existingUser)
       return res.status(400).send({ message: "User already exist" });
 
     const result = await newusers.create({
-      email,
-      name,
-      bio,
+      email : email,
+      name : name,
+      bio: bio,
       url: "",
     });
     res.status(200).send({ result });
