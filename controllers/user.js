@@ -4,8 +4,7 @@ const createANewAccount = async (req, res) => {
   const { name, email, bio = "", url } = req.body;
   try {
     const existingUser = await newusers.findOne({ email });
-    console.log(email)
-    console.log(existingUser)
+
     if (existingUser)
       return res.status(400).send({ message: "User already exist" });
 
@@ -17,7 +16,7 @@ const createANewAccount = async (req, res) => {
     });
     res.status(200).send({ result });
   } catch (error) {
-    res.status(500).send({ mesage: "something went wrong" });
+    res.status(500).send({ mesage: error });
   }
 };
 
